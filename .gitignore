@@ -1,0 +1,33 @@
+# Compiled assets
+build/
+bin/
+target/
+*.class
+gen/
+
+# Package files
+*.jar
+*.war
+*.ear
+*.db
+
+# OS X
+.DS_Store
+
+# Eclipse
+.project
+.metadata
+.classpath
+.settings/
+.loadpath
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+
+# Tools
+.sonar/
