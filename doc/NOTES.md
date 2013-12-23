@@ -44,6 +44,9 @@ mvn android:apk
 sonar.sh start
 mvn sonar:sonar
 http://localhost:9000
+
+# Get an access token and display trace to console
+curl -vv -X POST -H "Content-Type: application/x-www-form-urlencoded" -d grant_type=password -d username=aweeraman@gmail.com -d password=weeraman -d client_secret=ede2105b-049d-4d3b-878b-7a3a4ec0427f -d client_id=a26bdb49-a557-451a-9ebf-8965b94d9e66 -u a26bdb49-a557-451a-9ebf-8965b94d9e66:ede2105b-049d-4d3b-878b-7a3a4ec0427f http://anuradha.local:8080/api/oauth2/token --trace-ascii -
 ```
 
 # Problems and resolutions
