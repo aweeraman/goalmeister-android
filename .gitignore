@@ -28,6 +28,8 @@ tmp/**/*
 *.swp
 *~.nib
 local.properties
+.factorypath
 
 # Tools
 .sonar/
+/.apt_generated

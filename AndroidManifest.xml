@@ -20,14 +20,17 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.goalmeister.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+            android:name="com.goalmeister.LoginActivity_"
+            android:label="@string/title_activity_login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".SplashActivity_"
+            android:label="@string/title_activity_splash" >
         </activity>
     </application>
 
