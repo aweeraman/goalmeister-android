@@ -6,6 +6,7 @@ NOTES
 * Retrofit integration - done 12/29
 * Android Annotations integration - done 12/29
 * Navigation drawer - done 12/29
+* Invalidate token on logout
 * Screens
   * Splash screen - done 12/29
   * Login screen - done 12/29

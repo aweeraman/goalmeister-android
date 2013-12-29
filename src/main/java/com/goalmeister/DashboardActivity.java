@@ -8,6 +8,8 @@ import org.androidannotations.annotations.res.StringArrayRes;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -28,6 +30,9 @@ public class DashboardActivity extends ActionBarActivity {
   @StringArrayRes(R.array.drawer_items)
   String[] drawerListViewItems;
 
+  @StringArrayRes(R.array.drawer_fragments)
+  String[] drawerFragments;
+
   @ViewById(R.id.left_drawer)
   ListView drawerListView;
 
@@ -46,7 +51,7 @@ public class DashboardActivity extends ActionBarActivity {
         new ArrayAdapter<String>(getBaseContext(), R.layout.drawer_listview_item,
             drawerListViewItems);
     drawerListView.setAdapter(adapter);
-    drawerListView.setItemChecked(1, true);
+    selectItem(0);
     drawerListView.setOnItemClickListener(new OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -69,6 +74,10 @@ public class DashboardActivity extends ActionBarActivity {
   public void selectItem(int position) {
     drawerListView.setItemChecked(position, true);
     drawerLayout.closeDrawer(drawerListView);
+
+    FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+    tx.replace(R.id.content_frame, Fragment.instantiate(this, drawerFragments[position]));
+    tx.commit();
   }
 
   @Override
