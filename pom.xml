@@ -11,9 +11,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.google.android</groupId>
+			<groupId>android</groupId>
 			<artifactId>android</artifactId>
-			<version>4.1.1.4</version>
+			<version>4.4.2_r2</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -31,6 +31,23 @@
 			<groupId>org.androidannotations</groupId>
 			<artifactId>androidannotations-api</artifactId>
 			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>android.support</groupId>
+			<artifactId>compatibility-v4</artifactId>
+			<version>19.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>android.support</groupId>
+			<artifactId>compatibility-v7-appcompat</artifactId>
+			<version>19.0.0</version>
+			<type>apklib</type>
+		</dependency>
+		<dependency>
+			<groupId>android.support</groupId>
+			<artifactId>compatibility-v7-appcompat</artifactId>
+			<version>19.0.0</version>
+			<type>jar</type>
 		</dependency>
 	</dependencies>
 
@@ -62,7 +79,8 @@
 						</sdk>
 					</configuration>
 				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>

@@ -34,7 +34,9 @@
         </activity>
         <activity
             android:name="com.goalmeister.DashboardActivity_"
-            android:label="@string/title_activity_dashboard" >
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/Theme.AppCompat"
+            android:noHistory="true">
         </activity>
     </application>
 
