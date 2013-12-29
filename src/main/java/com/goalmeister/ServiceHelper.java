@@ -12,7 +12,7 @@ public class ServiceHelper {
   private GoalmeisterApp app;
 
   private RestAdapter restAdapter;
-  private RestService restService;
+  private ApiDelegate api;
 
   private static final String TAG = "ServiceHelper";
 
@@ -20,7 +20,7 @@ public class ServiceHelper {
     this.app = app;
 
     restAdapter = new RestAdapter.Builder().setServer(app.getBaseUri()).build();
-    restService = restAdapter.create(RestService.class);
+    api = restAdapter.create(ApiDelegate.class);
   }
 
   public boolean authenticate(String username, String password) {
@@ -28,7 +28,7 @@ public class ServiceHelper {
     String encodedHeader = Base64.encodeToString(authHeaderValue.getBytes(), Base64.NO_WRAP).trim();
     try {
       UserToken userToken =
-          restService.authToken("Basic " + encodedHeader, "password", username, password,
+          api.authToken("Basic " + encodedHeader, "password", username, password,
               app.getClientId(), app.getClientSecret());
       if (userToken != null && userToken.access_token != null) {
         app.setAccessToken(userToken.access_token);
