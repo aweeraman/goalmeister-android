@@ -24,6 +24,9 @@ public class DashboardActivity extends ActionBarActivity {
     
     actionBar = getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
+    actionBar.setDisplayUseLogoEnabled(false);
+    actionBar.setDisplayShowTitleEnabled(false);
+    actionBar.setIcon(R.drawable.logo);
   }
 
 

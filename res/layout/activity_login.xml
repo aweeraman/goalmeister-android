@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="15dp"
         android:src="@drawable/logo" />
 
     <EditText
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/loginPassword"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="15dp"
         android:text="@string/button_sign_in" />
     
     <Button
@@ -56,6 +56,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login"
-        android:text="@string/button_create_account" />
+        android:text="@string/button_create_account"/>
 
 </RelativeLayout>

@@ -19,7 +19,7 @@
         <activity
             android:name="com.goalmeister.LoginActivity_"
             android:label="@string/title_activity_login"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
             android:name="com.goalmeister.SplashActivity_"
@@ -35,7 +35,7 @@
         <activity
             android:name="com.goalmeister.DashboardActivity_"
             android:label="@string/title_activity_dashboard"
-            android:theme="@style/Theme.AppCompat"
+            android:theme="@style/Theme.AppCompat.Light"
             android:noHistory="true">
         </activity>
     </application>
