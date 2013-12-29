@@ -108,6 +108,7 @@ public class DashboardActivity extends ActionBarActivity {
       case R.id.logout:
         app.setAccessToken(null);
         finish();
+        break;
     }
 
     return true;
