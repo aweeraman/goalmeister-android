@@ -25,14 +25,13 @@ public class ServiceHelper {
 
   public boolean authenticate(String username, String password) {
     String authHeaderValue = app.getClientId() + ":" + app.getClientSecret();
-    String encodedHeader =
-        "Basic " + Base64.encodeToString(authHeaderValue.getBytes(), Base64.NO_WRAP).trim();
-    Log.i(TAG, ">" + encodedHeader + "<");
+    String encodedHeader = Base64.encodeToString(authHeaderValue.getBytes(), Base64.NO_WRAP).trim();
     try {
       UserToken userToken =
-          restService.authToken(encodedHeader, "password", username, password, app.getClientId(),
-              app.getClientSecret());
+          restService.authToken("Basic " + encodedHeader, "password", username, password,
+              app.getClientId(), app.getClientSecret());
       if (userToken != null && userToken.access_token != null) {
+        app.setAccessToken(userToken.access_token);
         return true;
       }
     } catch (RetrofitError error) {

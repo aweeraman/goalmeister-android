@@ -1,22 +1,39 @@
 package com.goalmeister;
 
+import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.os.Handler;
 
-@EActivity(R.layout.activity_splash)
+@EActivity
 public class SplashActivity extends Activity {
 
-  @ViewById
-  TextView helloText;
+  @App
+  GoalmeisterApp app;
+
+  private static int TIME_OUT = 1000;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_splash);
-    helloText.setText("Splash");
+
+    new Handler().postDelayed(new Runnable() {
+
+      @Override
+      public void run() {
+
+        if (app.getAccessToken() != null) {
+          startActivity(new Intent(SplashActivity.this, DashboardActivity_.class));
+        } else {
+          startActivity(new Intent(SplashActivity.this, LoginActivity_.class));
+        }
+        finish();
+      }
+
+    }, TIME_OUT);
   }
 }

@@ -8,6 +8,7 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -26,9 +27,9 @@ public class LoginActivity extends Activity {
   @UiThread
   public void authenticationResult(boolean successful) {
     if (successful) {
-      Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+      startActivity(new Intent(this, DashboardActivity_.class));
     } else {
-      Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+      Toast.makeText(this, "Login failed, please try again", Toast.LENGTH_LONG).show();
     }
   }
 
