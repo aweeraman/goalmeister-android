@@ -29,7 +29,8 @@ public class LoginActivity extends Activity {
     if (successful) {
       startActivity(new Intent(this, DashboardActivity_.class));
     } else {
-      Toast.makeText(this, "Login failed, please try again", Toast.LENGTH_LONG).show();
+      Toast.makeText(this, getResources().getString(R.string.failed_login), Toast.LENGTH_LONG)
+          .show();
     }
   }
 

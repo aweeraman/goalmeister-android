@@ -35,7 +35,9 @@ public class ServiceHelper {
         return true;
       }
     } catch (RetrofitError error) {
-      if (error.getResponse().getStatus() == 401) {
+      if (error.getResponse() == null) {
+        Log.e(TAG, "No response - server possibly down");
+      } else if (error.getResponse().getStatus() == 401) {
         Log.e(TAG, "Authentication failed");
       } else {
         Log.e(TAG, "Other handled error during authentication: " + error.getResponse().getReason());
