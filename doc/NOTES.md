@@ -38,6 +38,8 @@ Crash reporting - https://www.bugsense.com/docs/android#acra
 Google analytics for user engagement
 
 AppBrain stats - http://www.appbrain.com/stats/libraries/dev
+
+Hex color tool - http://hexcolortool.com/
 ```
 
 
