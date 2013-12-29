@@ -1,5 +1,6 @@
 package com.goalmeister;
 
+import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -7,25 +8,20 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import android.app.Activity;
-import android.view.Menu;
 import android.widget.EditText;
 import android.widget.Toast;
 
 @EActivity(R.layout.activity_login)
 public class LoginActivity extends Activity {
 
-  @ViewById
-  public EditText loginUsername;
+  @App
+  GoalmeisterApp app;
 
   @ViewById
-  public EditText loginPassword;
+  EditText loginUsername;
 
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.login, menu);
-    return true;
-  }
+  @ViewById
+  EditText loginPassword;
 
   @UiThread
   public void authenticationResult(boolean successful) {
@@ -43,6 +39,6 @@ public class LoginActivity extends Activity {
 
   @Background
   public void authenticateInBackground(String username, String password) {
-    authenticationResult(ServiceHelper.authenticate(username, password));
+    authenticationResult(app.getServiceHelper().authenticate(username, password));
   }
 }

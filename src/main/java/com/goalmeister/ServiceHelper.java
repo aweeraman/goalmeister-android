@@ -7,30 +7,32 @@ import com.goalmeister.model.UserToken;
 
 public class ServiceHelper {
 
-  public static UserToken userToken;
+  private GoalmeisterApp app;
 
-  private final static String BASE_URI = "http://192.168.1.5:8080";
-  private final static String CLIENT_ID = "a26bdb49-a557-451a-9ebf-8965b94d9e66";
-  private final static String CLIENT_SECRET = "ede2105b-049d-4d3b-878b-7a3a4ec0427f";
+  private RestAdapter restAdapter;
+  private RestService restService;
 
-  private static RestAdapter restAdapter = new RestAdapter.Builder().setServer(BASE_URI).build();
+  public ServiceHelper(GoalmeisterApp app) {
+    this.app = app;
+    
+    restAdapter = new RestAdapter.Builder().setServer(app.getBaseUri()).build();
+    restService = restAdapter.create(RestService.class);
+  }
 
-  public static boolean authenticate(String username, String password) {
-    AuthenticationService authService = restAdapter.create(AuthenticationService.class);
+  public boolean authenticate(String username, String password) {
     try {
-      userToken =
-          authService
+      UserToken userToken =
+          restService
               .authToken(
                   "Basic YTI2YmRiNDktYTU1Ny00NTFhLTllYmYtODk2NWI5NGQ5ZTY2OmVkZTIxMDViLTA0OWQtNGQzYi04NzhiLTdhM2E0ZWMwNDI3Zg==",
-                  "password", username, password, CLIENT_ID, CLIENT_SECRET);
+                  "password", username, password, app.getClientId(), app.getClientSecret());
+      if (userToken != null && userToken.access_token != null) {
+        return true;
+      }
     } catch (RetrofitError error) {
       if (error.getResponse().getStatus() == 401) {
         return false;
       }
-    }
-
-    if (userToken != null && userToken.access_token != null) {
-      return true;
     }
     return false;
   }

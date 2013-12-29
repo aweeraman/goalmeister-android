@@ -7,7 +7,7 @@ import retrofit.http.POST;
 
 import com.goalmeister.model.UserToken;
 
-public interface AuthenticationService {
+public interface RestService {
 
   @FormUrlEncoded
   @POST("/api/oauth2/token")
