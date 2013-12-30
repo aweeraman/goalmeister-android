@@ -25,14 +25,14 @@ public class LoginActivity extends ActionBarActivity {
 
   @ViewById
   EditText loginPassword;
-  
+
   ActionBar actionBar;
-  
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_dashboard);
-    
+
     actionBar = getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(false);
     actionBar.setDisplayUseLogoEnabled(false);
@@ -42,7 +42,9 @@ public class LoginActivity extends ActionBarActivity {
   @UiThread
   public void authenticationResult(boolean successful) {
     if (successful) {
-      startActivity(new Intent(this, DashboardActivity_.class));
+      Intent intent = new Intent(this, DashboardActivity_.class);
+      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+      startActivity(intent);
     } else {
       Toast.makeText(this, getResources().getString(R.string.failed_login), Toast.LENGTH_LONG)
           .show();

@@ -19,7 +19,8 @@
         <activity
             android:name="com.goalmeister.LoginActivity_"
             android:label="@string/title_activity_login"
-            android:theme="@style/Theme.AppCompat.Light" >
+            android:theme="@style/Theme.AppCompat.Light"
+            android:noHistory="true">
         </activity>
         <activity
             android:name="com.goalmeister.SplashActivity_"

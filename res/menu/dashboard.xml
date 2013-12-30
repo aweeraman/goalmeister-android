@@ -1,9 +1,10 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:goalmeister="http://schemas.android.com/apk/res-auto" >
 
     <item
         android:id="@+id/logout"
         android:orderInCategory="100"
-        android:showAsAction="withText"
+        goalmeister:showAsAction="always|withText"
         android:title="@string/logout"/>
 
 </menu>
