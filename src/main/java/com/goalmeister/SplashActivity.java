@@ -26,11 +26,7 @@ public class SplashActivity extends Activity {
       @Override
       public void run() {
 
-        if (app.getAccessToken() != null) {
-          startActivity(new Intent(SplashActivity.this, DashboardActivity_.class));
-        } else {
-          startActivity(new Intent(SplashActivity.this, LoginActivity_.class));
-        }
+        startActivity(new Intent(SplashActivity.this, DashboardActivity_.class));
         finish();
       }
 

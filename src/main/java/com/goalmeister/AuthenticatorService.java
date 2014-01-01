@@ -10,13 +10,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 
 public class AuthenticatorService extends Service {
-  
+
   private AuthenticatorImpl authenticatorImpl;
 
   public AuthenticatorService() {
     super();
+  }
+
+  @Override
+  public void onCreate() {
+    authenticatorImpl = getAuthenticator();
   }
 
   @Override
@@ -34,10 +40,10 @@ public class AuthenticatorService extends Service {
     }
     return authenticatorImpl;
   }
-  
+
   private class AuthenticatorImpl extends AbstractAccountAuthenticator {
     private Context context;
-    
+
     private AuthenticatorImpl(Context context) {
       super(context);
       this.context = context;
@@ -53,14 +59,17 @@ public class AuthenticatorService extends Service {
     public Bundle addAccount(AccountAuthenticatorResponse response, String accountType,
         String authTokenType, String[] requiredFeatures, Bundle options)
         throws NetworkErrorException {
-      
+
       Bundle reply = new Bundle();
-      
-      Intent i = new Intent(context, LoginActivity.class);
-      i.setAction("com.goalmeister.login");
-      i.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-      reply.putParcelable(AccountManager.KEY_INTENT, i);
-      
+
+      Intent intent = new Intent(context, LoginActivity_.class);
+      intent.setAction("com.goalmeister.login");
+      intent.putExtra(LoginActivity.ACCOUNT_TYPE, accountType);
+      intent.putExtra(LoginActivity.AUTH_TYPE, authTokenType);
+      intent.putExtra(LoginActivity.NEW_ACCOUNT, true);
+      intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+
+      reply.putParcelable(AccountManager.KEY_INTENT, intent);
       return reply;
     }
 
@@ -94,8 +103,9 @@ public class AuthenticatorService extends Service {
     @Override
     public Bundle hasFeatures(AccountAuthenticatorResponse response, Account account,
         String[] features) throws NetworkErrorException {
-      // TODO Auto-generated method stub
-      return null;
+      final Bundle result = new Bundle();
+      result.putBoolean(AccountManager.KEY_BOOLEAN_RESULT, false);
+      return result;
     }
   }
 

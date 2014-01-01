@@ -33,6 +33,10 @@ public class LoginActivity extends ActionBarActivity {
 
   @SystemService
   AccountManager accountManager;
+  
+  public static final String ACCOUNT_TYPE = "account_type";
+  public static final String AUTH_TYPE = "auth_type";
+  public static final String NEW_ACCOUNT = "new_account";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
