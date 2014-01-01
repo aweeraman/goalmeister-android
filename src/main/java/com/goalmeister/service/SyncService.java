@@ -38,7 +38,6 @@ public class SyncService extends Service {
       this.context = context;
     }
 
-
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority,
         ContentProviderClient provider, SyncResult syncResult) {
