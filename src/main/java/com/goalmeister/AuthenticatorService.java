@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 
 public class AuthenticatorService extends Service {
 
@@ -63,10 +62,6 @@ public class AuthenticatorService extends Service {
       Bundle reply = new Bundle();
 
       Intent intent = new Intent(context, LoginActivity_.class);
-      intent.setAction("com.goalmeister.login");
-      intent.putExtra(LoginActivity.ACCOUNT_TYPE, accountType);
-      intent.putExtra(LoginActivity.AUTH_TYPE, authTokenType);
-      intent.putExtra(LoginActivity.NEW_ACCOUNT, true);
       intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
 
       reply.putParcelable(AccountManager.KEY_INTENT, intent);
@@ -76,27 +71,27 @@ public class AuthenticatorService extends Service {
     @Override
     public Bundle confirmCredentials(AccountAuthenticatorResponse response, Account account,
         Bundle options) throws NetworkErrorException {
-      // TODO Auto-generated method stub
+      // Unhandled
       return null;
     }
 
     @Override
     public Bundle getAuthToken(AccountAuthenticatorResponse response, Account account,
         String authTokenType, Bundle options) throws NetworkErrorException {
-      // TODO Auto-generated method stub
+      // Unhandled
       return null;
     }
 
     @Override
     public String getAuthTokenLabel(String authTokenType) {
-      // TODO Auto-generated method stub
+      // Unhandled
       return null;
     }
 
     @Override
     public Bundle updateCredentials(AccountAuthenticatorResponse response, Account account,
         String authTokenType, Bundle options) throws NetworkErrorException {
-      // TODO Auto-generated method stub
+      // Unhandled
       return null;
     }
 

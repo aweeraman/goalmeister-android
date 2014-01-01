@@ -2,6 +2,7 @@ package com.goalmeister;
 
 import org.androidannotations.annotations.EApplication;
 
+import android.accounts.Account;
 import android.app.Application;
 import android.content.SharedPreferences;
 
@@ -15,13 +16,23 @@ public class GoalmeisterApp extends Application {
   private final static String ACCESS_TOKEN_PREF_KEY = "access_token";
   
   private String accessToken;
+  
   private ServiceHelper serviceHelper;
+  private Account account;
   
   public GoalmeisterApp() {
     super();
     serviceHelper = new ServiceHelper(this);
   }
   
+  public Account getAccount() {
+    return account;
+  }
+
+  public void setAccount(Account account) {
+    this.account = account;
+  }
+
   public ServiceHelper getServiceHelper() {
     return serviceHelper;
   }

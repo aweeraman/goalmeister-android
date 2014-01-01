@@ -23,7 +23,6 @@
         <activity
             android:name="com.goalmeister.LoginActivity_"
             android:label="@string/title_activity_login"
-            android:noHistory="true"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
@@ -40,7 +39,6 @@
         <activity
             android:name="com.goalmeister.DashboardActivity_"
             android:label="@string/title_activity_dashboard"
-            android:noHistory="true"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
 

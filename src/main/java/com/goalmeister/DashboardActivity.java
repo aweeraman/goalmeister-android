@@ -1,18 +1,31 @@
 package com.goalmeister;
 
+import java.io.IOException;
+
 import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.SystemService;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringArrayRes;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Handler.Callback;
+import android.os.Message;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +36,8 @@ import android.widget.ListView;
 
 @EActivity
 public class DashboardActivity extends ActionBarActivity {
+
+  private static final String TAG = "DashboardActivity";
 
   @App
   GoalmeisterApp app;
@@ -42,10 +57,19 @@ public class DashboardActivity extends ActionBarActivity {
   ActionBar actionBar;
   ActionBarDrawerToggle drawerToggle;
 
+  @SystemService
+  AccountManager accountManager;
+
+  private Account account;
+  private String authToken;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
     setContentView(R.layout.activity_dashboard);
+
+    loginChooser();
 
     ArrayAdapter<String> adapter =
         new ArrayAdapter<String>(getBaseContext(), R.layout.drawer_listview_item,
@@ -58,6 +82,7 @@ public class DashboardActivity extends ActionBarActivity {
         selectItem(position);
       }
     });
+
     drawerToggle =
         new ActionBarDrawerToggle(this, drawerLayout, R.drawable.ic_drawer, R.string.open_drawer,
             R.string.close_drawer);
@@ -69,6 +94,74 @@ public class DashboardActivity extends ActionBarActivity {
     actionBar.setDisplayUseLogoEnabled(false);
     actionBar.setDisplayShowTitleEnabled(false);
     actionBar.setIcon(R.drawable.logo);
+  }
+
+  private void fetchAuthToken() {
+    Bundle options = new Bundle();
+    accountManager.getAuthToken(account, "com.goalmeister", options, this,
+        new OnFetchAccount(), new Handler(new OnFetchError()));
+  }
+
+  private class OnFetchError implements Callback {
+    @Override
+    public boolean handleMessage(Message msg) {
+      Log.e(TAG, "Error fetching auth token");
+      return false;
+    }
+  }
+
+  private class OnFetchAccount implements AccountManagerCallback<Bundle> {
+    @Override
+    public void run(AccountManagerFuture<Bundle> result) {
+      Bundle bundle;
+      try {
+        bundle = result.getResult();
+      } catch (Exception e) {
+        Log.e(TAG, e.getMessage());
+        return;
+      }
+      authToken = bundle.getString(AccountManager.KEY_AUTHTOKEN);
+      app.setAccessToken(authToken);
+      Log.d(TAG, "Received authentication token " + authToken);
+    }
+  }
+
+  private class OnNewAccountAdd implements AccountManagerCallback<Bundle> {
+    @Override
+    public void run(AccountManagerFuture<Bundle> result) {
+      Bundle bundle;
+      try {
+        bundle = result.getResult();
+      } catch (Exception e) {
+        Log.e(TAG, e.getMessage());
+        return;
+      }
+      account =
+          new Account(bundle.getString(AccountManager.KEY_ACCOUNT_NAME),
+              bundle.getString(AccountManager.KEY_ACCOUNT_TYPE));
+      Log.d(TAG, "Added account " + account.name);
+      fetchAuthToken();
+    }
+  }
+
+  private void loginChooser() {
+    accountManager = AccountManager.get(this);
+    Account[] acc = accountManager.getAccountsByType("com.goalmeister");
+    
+    if (acc.length == 0) {
+      // No accounts found, create new account
+      accountManager.addAccount("com.goalmeister", "goalmeister", null, new Bundle(), this,
+          new OnNewAccountAdd(), null);
+    } else if (acc.length == 1) {
+      // One account found, use that
+      account = acc[0];
+      fetchAuthToken();
+    } else if (acc.length > 1) {
+      // More than one account found, select the first account
+      Log.d(TAG, "More than one account encountered, selecting the first one");
+      account = acc[0];
+      fetchAuthToken();
+    }
   }
 
   public void selectItem(int position) {
