@@ -9,6 +9,7 @@
         android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
 
     <application
         android:name="com.goalmeister.GoalmeisterApp_"
@@ -19,8 +20,8 @@
         <activity
             android:name="com.goalmeister.LoginActivity_"
             android:label="@string/title_activity_login"
-            android:theme="@style/Theme.AppCompat.Light"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
             android:name="com.goalmeister.SplashActivity_"
@@ -36,9 +37,22 @@
         <activity
             android:name="com.goalmeister.DashboardActivity_"
             android:label="@string/title_activity_dashboard"
-            android:theme="@style/Theme.AppCompat.Light"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:theme="@style/Theme.AppCompat.Light" >
         </activity>
+
+        <service
+            android:name="AuthenticatorService"
+            android:exported="true"
+            android:process=":auth" >
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
     </application>
 
 </manifest>
