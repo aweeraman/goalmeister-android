@@ -3,19 +3,17 @@
 
     <string name="app_name">Goalmeister</string>
     
-    <!-- LoginActivity -->
-    <string name="logout">Logout</string>
+     <!-- LoginActivity -->
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="button_sign_in">Sign in</string>
     <string name="button_create_account">Create an account</string>
     <string name="server_down">Unable to contact Goalmeister. Please try again later.</string>
     <string name="failed_login">Login failed. Please confirm internet connectivity and try again.</string>
-    
+
     <!-- DashboardActivity -->
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
-    
     <string name="title_activity_splash">Goalmeister</string>
     <string name="title_activity_login">Sign in to Goalmeister</string>
     <string name="title_activity_dashboard">Goalmeister</string>

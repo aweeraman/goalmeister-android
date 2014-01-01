@@ -49,9 +49,9 @@ public class LoginActivity extends ActionBarActivity {
   public void authenticationResult(boolean successful, String username, String password,
       String token) {
     if (successful) {
-      Account account = new Account(username, "com.goalmeister");
+      Account account = new Account(username, AppConfig.AUTH_TYPE);
       boolean created = accountManager.addAccountExplicitly(account, null, null);
-      accountManager.setAuthToken(account, "com.goalmeister", token);
+      accountManager.setAuthToken(account, AppConfig.AUTH_TYPE, token);
       Bundle extras = getIntent().getExtras();
       if (extras != null) {
         if (created) {
@@ -59,7 +59,7 @@ public class LoginActivity extends ActionBarActivity {
               extras.getParcelable(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE);
           Bundle result = new Bundle();
           result.putString(AccountManager.KEY_ACCOUNT_NAME, username);
-          result.putString(AccountManager.KEY_ACCOUNT_TYPE, "com.goalmeister");
+          result.putString(AccountManager.KEY_ACCOUNT_TYPE, AppConfig.AUTH_TYPE);
           response.onResult(result);
         }
       }

@@ -1,7 +1,5 @@
 package com.goalmeister;
 
-import java.io.IOException;
-
 import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.SystemService;
@@ -12,8 +10,6 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -98,8 +94,8 @@ public class DashboardActivity extends ActionBarActivity {
 
   private void fetchAuthToken() {
     Bundle options = new Bundle();
-    accountManager.getAuthToken(account, "com.goalmeister", options, this,
-        new OnFetchAccount(), new Handler(new OnFetchError()));
+    accountManager.getAuthToken(account, AppConfig.AUTH_TYPE, options, this, new OnFetchAccount(),
+        new Handler(new OnFetchError()));
   }
 
   private class OnFetchError implements Callback {
@@ -146,12 +142,12 @@ public class DashboardActivity extends ActionBarActivity {
 
   private void loginChooser() {
     accountManager = AccountManager.get(this);
-    Account[] acc = accountManager.getAccountsByType("com.goalmeister");
-    
+    Account[] acc = accountManager.getAccountsByType(AppConfig.AUTH_TYPE);
+
     if (acc.length == 0) {
       // No accounts found, create new account
-      accountManager.addAccount("com.goalmeister", "goalmeister", null, new Bundle(), this,
-          new OnNewAccountAdd(), null);
+      accountManager.addAccount(AppConfig.AUTH_TYPE, AppConfig.AUTH_TOKEN_TYPE, null, new Bundle(),
+          this, new OnNewAccountAdd(), null);
     } else if (acc.length == 1) {
       // One account found, use that
       account = acc[0];
@@ -195,13 +191,6 @@ public class DashboardActivity extends ActionBarActivity {
   public boolean onOptionsItemSelected(MenuItem item) {
     if (drawerToggle.onOptionsItemSelected(item)) {
       return true;
-    }
-
-    switch (item.getItemId()) {
-      case R.id.logout:
-        app.setAccessToken(null);
-        finish();
-        break;
     }
 
     return true;

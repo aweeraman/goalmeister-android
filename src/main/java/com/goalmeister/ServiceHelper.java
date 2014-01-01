@@ -19,17 +19,17 @@ public class ServiceHelper {
   public ServiceHelper(GoalmeisterApp app) {
     this.app = app;
 
-    restAdapter = new RestAdapter.Builder().setServer(app.getBaseUri()).build();
+    restAdapter = new RestAdapter.Builder().setServer(AppConfig.BASE_URI).build();
     api = restAdapter.create(ApiDelegate.class);
   }
 
   public boolean authenticate(String username, String password) {
-    String authHeaderValue = app.getClientId() + ":" + app.getClientSecret();
+    String authHeaderValue = AppConfig.CLIENT_ID + ":" + AppConfig.CLIENT_SECRET;
     String encodedHeader = Base64.encodeToString(authHeaderValue.getBytes(), Base64.NO_WRAP).trim();
     try {
       UserToken userToken =
           api.authToken("Basic " + encodedHeader, "password", username, password,
-              app.getClientId(), app.getClientSecret());
+              AppConfig.CLIENT_ID, AppConfig.CLIENT_SECRET);
       if (userToken != null && userToken.access_token != null) {
         app.setAccessToken(userToken.access_token);
         return true;
