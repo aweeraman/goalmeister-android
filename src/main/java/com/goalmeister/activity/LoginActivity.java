@@ -1,4 +1,4 @@
-package com.goalmeister;
+package com.goalmeister.activity;
 
 import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Background;
@@ -16,6 +16,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.goalmeister.AppConfig;
+import com.goalmeister.GoalmeisterApp;
+import com.goalmeister.R;
 
 @EActivity(R.layout.activity_login)
 public class LoginActivity extends ActionBarActivity {

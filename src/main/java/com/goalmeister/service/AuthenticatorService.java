@@ -1,4 +1,4 @@
-package com.goalmeister;
+package com.goalmeister.service;
 
 import android.accounts.AbstractAccountAuthenticator;
 import android.accounts.Account;
@@ -10,6 +10,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
+
+import com.goalmeister.activity.LoginActivity_;
 
 public class AuthenticatorService extends Service {
 

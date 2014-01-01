@@ -1,4 +1,4 @@
-package com.goalmeister;
+package com.goalmeister.api;
 
 import java.util.List;
 

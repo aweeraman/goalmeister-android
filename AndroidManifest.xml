@@ -23,12 +23,12 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.goalmeister.LoginActivity_"
+            android:name="com.goalmeister.activity.LoginActivity_"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
-            android:name="com.goalmeister.SplashActivity_"
+            android:name="com.goalmeister.activity.SplashActivity_"
             android:label="@string/title_activity_splash"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
@@ -39,13 +39,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.goalmeister.DashboardActivity_"
+            android:name="com.goalmeister.activity.DashboardActivity_"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
 
         <service
-            android:name="AuthenticatorService"
+            android:name="com.goalmeister.service.AuthenticatorService"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
@@ -56,7 +56,7 @@
                 android:resource="@xml/authenticator" />
         </service>
         <service
-            android:name=".SyncService"
+            android:name="com.goalmeister.service.SyncService"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />

@@ -1,4 +1,4 @@
-package com.goalmeister;
+package com.goalmeister.activity;
 
 import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.EActivity;
@@ -7,6 +7,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.goalmeister.GoalmeisterApp;
+import com.goalmeister.R;
 
 @EActivity
 public class SplashActivity extends Activity {

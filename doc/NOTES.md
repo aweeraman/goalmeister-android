@@ -7,6 +7,8 @@ NOTES
 * Android Annotations integration - done 12/29
 * Navigation drawer - done 12/29
 * Invalidate token on logout
+* Integrate the account manager - done 1/1
+* Sync service for offline caching
 * Screens
   * Splash screen - done 12/29
   * Login screen - done 12/29

@@ -1,10 +1,12 @@
-package com.goalmeister;
+package com.goalmeister.api;
 
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import android.util.Base64;
 import android.util.Log;
 
+import com.goalmeister.AppConfig;
+import com.goalmeister.GoalmeisterApp;
 import com.goalmeister.model.UserToken;
 
 public class ServiceHelper {

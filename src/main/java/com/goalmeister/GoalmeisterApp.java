@@ -6,6 +6,8 @@ import android.accounts.Account;
 import android.app.Application;
 import android.content.SharedPreferences;
 
+import com.goalmeister.api.ServiceHelper;
+
 @EApplication
 public class GoalmeisterApp extends Application {
   

@@ -1,4 +1,4 @@
-package com.goalmeister;
+package com.goalmeister.activity;
 
 import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.EActivity;
@@ -29,6 +29,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.goalmeister.AppConfig;
+import com.goalmeister.GoalmeisterApp;
+import com.goalmeister.R;
 
 @EActivity
 public class DashboardActivity extends ActionBarActivity {

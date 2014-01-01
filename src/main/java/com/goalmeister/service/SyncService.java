@@ -1,4 +1,4 @@
-package com.goalmeister;
+package com.goalmeister.service;
 
 import android.accounts.Account;
 import android.app.Service;

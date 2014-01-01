@@ -1,4 +1,4 @@
-package com.goalmeister.fragments;
+package com.goalmeister.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
