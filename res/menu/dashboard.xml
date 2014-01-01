@@ -1,4 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:goalmeister="http://schemas.android.com/apk/res-auto" >
 
+    <item
+        android:id="@+id/createTestData"
+        android:title="Create Test Data"/>
+
 </menu>

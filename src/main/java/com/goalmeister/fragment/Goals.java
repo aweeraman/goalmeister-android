@@ -1,21 +1,22 @@
 package com.goalmeister.fragment;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
 import com.goalmeister.R;
+import com.goalmeister.database.DbHandler;
 
 public class Goals extends Fragment {
 
   GridView gridView;
-
-  static final String[] goals = new String[] {"Jump out of an airplane", "Write a novel", "Spend a week in Tuscany", "Go on a safari in Kalahari"};
+  SimpleCursorAdapter cursorAdapter;
 
   public static Fragment newInstance(Context context) {
     return new Goals();
@@ -26,10 +27,14 @@ public class Goals extends Fragment {
     View v = (ViewGroup) inflater.inflate(R.layout.fragment_goals, null);
 
     gridView = (GridView) v.findViewById(R.id.gridView);
-    ArrayAdapter<String> a =
-        new ArrayAdapter<String>(getActivity(), R.layout.goals_gridview_item, R.id.gridTextView,
-            goals);
-    gridView.setAdapter(a);
+
+    DbHandler dbHandler = new DbHandler(getActivity(), null, null, 1);
+    Cursor cursor = dbHandler.goalsList();
+    String columns[] = {DbHandler.GOALS_COLUMN_ID, DbHandler.GOALS_TITLE};
+    int[] to = {R.id.gridItemId, R.id.gridTextView};
+    cursorAdapter =
+        new SimpleCursorAdapter(getActivity(), R.layout.goals_gridview_item, cursor, columns, to, 0);
+    gridView.setAdapter(cursorAdapter);
 
     return v;
   }

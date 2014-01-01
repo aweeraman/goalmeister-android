@@ -10,7 +10,9 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
+import android.content.ContentValues;
 import android.content.res.Configuration;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
@@ -29,10 +31,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.goalmeister.AppConfig;
 import com.goalmeister.GoalmeisterApp;
 import com.goalmeister.R;
+import com.goalmeister.database.DbHandler;
 
 @EActivity
 public class DashboardActivity extends ActionBarActivity {
@@ -197,6 +201,46 @@ public class DashboardActivity extends ActionBarActivity {
       return true;
     }
 
+    switch (item.getItemId()) {
+      case R.id.createTestData:
+        Toast.makeText(this, "Creating test data", Toast.LENGTH_SHORT).show();
+        createTestData();
+        break;
+    }
+
     return true;
+  }
+
+  private void createTestData() {
+    DbHandler dbHandler = new DbHandler(this, null, null, 1);
+    SQLiteDatabase db = dbHandler.getWritableDatabase();
+    dbHandler.onUpgrade(db, 1, 1);
+    
+    ContentValues values = new ContentValues();
+    
+    values.put(DbHandler.GOALS_TITLE, "Write a novel");
+    values.put(DbHandler.GOALS_DESCRIPTION, "Be a best selling author");
+    long id = db.insert(DbHandler.GOALS_TABLE, null, values);
+    Log.d(TAG, "Inserted test data: " + id);
+    
+    values = new ContentValues();
+    values.put(DbHandler.GOALS_TITLE, "Jump out of an airplane");
+    values.put(DbHandler.GOALS_DESCRIPTION, "Experience terminal velocity for 45 seconds");
+    id = db.insert(DbHandler.GOALS_TABLE, null, values);
+    Log.d(TAG, "Inserted test data: " + id);
+    
+    values = new ContentValues();
+    values.put(DbHandler.GOALS_TITLE, "Learn to swim");
+    values.put(DbHandler.GOALS_DESCRIPTION, "So that I can swim with the dolphins");
+    id = db.insert(DbHandler.GOALS_TABLE, null, values);
+    Log.d(TAG, "Inserted test data: " + id);
+    
+    values = new ContentValues();
+    values.put(DbHandler.GOALS_TITLE, "Watch a sunrise");
+    values.put(DbHandler.GOALS_DESCRIPTION, "And experience the magic of the universe");
+    id = db.insert(DbHandler.GOALS_TABLE, null, values);
+    Log.d(TAG, "Inserted test data: " + id);
+
+    db.close();
   }
 }
