@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.goalmeister.AppConfig;
 import com.goalmeister.GoalmeisterApp;
+import com.goalmeister.Response;
 import com.goalmeister.model.UserToken;
 
 public class ServiceHelper {
@@ -25,7 +26,7 @@ public class ServiceHelper {
     api = restAdapter.create(ApiDelegate.class);
   }
 
-  public boolean authenticate(String username, String password) {
+  public Response authenticate(String username, String password) {
     String authHeaderValue = AppConfig.CLIENT_ID + ":" + AppConfig.CLIENT_SECRET;
     String encodedHeader = Base64.encodeToString(authHeaderValue.getBytes(), Base64.NO_WRAP).trim();
     try {
@@ -34,18 +35,21 @@ public class ServiceHelper {
               AppConfig.CLIENT_ID, AppConfig.CLIENT_SECRET);
       if (userToken != null && userToken.access_token != null) {
         app.setAccessToken(userToken.access_token);
-        return true;
+        return Response.STATUS_OK;
       }
     } catch (RetrofitError error) {
       if (error.getResponse() == null) {
-        Log.e(TAG, "No response - server possibly down");
+        Log.e(TAG, "Server is down");
+        return Response.ERROR_SERVER_DOWN;
       } else if (error.getResponse().getStatus() == 401) {
-        Log.e(TAG, "Authentication failed");
+        Log.e(TAG, "Authentication failed for " + username + "/" + password);
+        return Response.ERROR_INVALID_USERNAME_OR_PASSWORD;
       } else {
-        Log.e(TAG, "Other handled error during authentication: " + error.getResponse().getReason());
+        Log.e(TAG, "Unknown error during authentication: " + error.getResponse().getReason());
+        return Response.STATUS_ERROR;
       }
     }
-    return false;
+    return Response.STATUS_OK;
   }
 
 }
