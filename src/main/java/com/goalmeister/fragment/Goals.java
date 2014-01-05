@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +11,12 @@ import android.widget.GridView;
 
 import com.goalmeister.R;
 import com.goalmeister.database.DbHandler;
+import com.goalmeister.database.GoalsCursorAdapter;
 
 public class Goals extends Fragment {
 
   GridView gridView;
-  SimpleCursorAdapter cursorAdapter;
+  GoalsCursorAdapter cursorAdapter;
 
   public static Fragment newInstance(Context context) {
     return new Goals();
@@ -33,7 +33,7 @@ public class Goals extends Fragment {
     String columns[] = {DbHandler.GOALS_COLUMN_ID, DbHandler.GOALS_TITLE};
     int[] to = {R.id.gridItemId, R.id.gridTextView};
     cursorAdapter =
-        new SimpleCursorAdapter(getActivity(), R.layout.goals_gridview_item, cursor, columns, to, 0);
+        new GoalsCursorAdapter(getActivity(), R.layout.goals_gridview_item, cursor, columns, to, 0);
     gridView.setAdapter(cursorAdapter);
 
     return v;

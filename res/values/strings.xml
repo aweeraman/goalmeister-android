@@ -16,6 +16,8 @@
     <!-- DashboardActivity -->
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
+    <string name="new_goal">New Goal</string>
+    
     <string name="title_activity_splash">Goalmeister</string>
     <string name="title_activity_login">Sign in to Goalmeister</string>
     <string name="title_activity_dashboard">Goalmeister</string>
