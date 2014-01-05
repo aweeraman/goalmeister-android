@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="5dp" >
+    android:padding="2dp" >
 
     <TextView
         android:id="@+id/gridItemId"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/gridTextView"

@@ -8,7 +8,6 @@
     <string name="hint_password">Password</string>
     <string name="button_sign_in">Sign in</string>
     <string name="button_create_account">Create an account</string>
-    <string name="server_down">Unable to contact Goalmeister. Please try again later.</string>
     <string name="failed_login">Invalid email or password!</string>
     <string name="server_down">Server is down for maintenance. Please try again later.</string>
     <string name="server_error">Server error. Please contact anuradha@goalmeister.com if problem persists.</string>
